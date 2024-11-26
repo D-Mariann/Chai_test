@@ -42,14 +42,7 @@ describe('demo', () => {
         });   
     });
 
-    describe('/users/:id/buy/:price', function() {
-        // before(() => {
-        //     let r = app.get("users/1");
-        //     // let s = r.json();
-        //     console.log(r);
-        //     let score = s.user.balance;
-        //     console.log(+score);
-        // });
+    describe('/users/:id/buy/:price', function() {        
         it('User makes a purchase worth the price', async function() {
             let id = 1
             let price = 10;
