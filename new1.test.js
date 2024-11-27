@@ -43,8 +43,6 @@ describe('demo', () => {
     });
 
     describe('/users/:id/buy/:price', function() {
-        let len = users.lenght
-        let bal = users
         it('User makes a purchase worth the price', async function() {
             let id = 1
             let price = 10;
@@ -80,8 +78,7 @@ describe('demo', () => {
     });
 
 
-    describe('/users/:id/faucet/:amount', function() {
-                
+    describe('/users/:id/faucet/:amount', function() {                
         it('Give the user money for free', async function() {
             let id = 1
             let amount = 10;
