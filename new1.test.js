@@ -8,7 +8,6 @@ describe('demo', () => {
         it("Has a user info by id", async () => {      
             let r = await app.get("users/1");
             expect(r).to.have.property('status', 200);
-
             const res = await r.json();         
             expect(res.user.id).equal(1);
             expect(res.user.name).equal('John');
@@ -24,7 +23,7 @@ describe('demo', () => {
     });
 
     describe('users', function() {
-        it('Registering a new user', async function() {
+        it('Registering a new user Alice', async function() {
             const res = await app.post('users', { name: 'Alice' }); 
             let arr = users.users;
             let len = arr.length;         
@@ -33,7 +32,7 @@ describe('demo', () => {
             expect(data.user).to.deep.equal({ id: len, name: 'Alice', balance: 0.0 });
         });              
            
-        it('Registering a new user2', async function() {
+        it('Registering a new user Gena', async function() {
             const res = await app.post('users', { name: 'Gena' });            
             expect(res.status).equal(200);
             const data = await res.json();
@@ -45,7 +44,7 @@ describe('demo', () => {
     });
 
     describe('/users/:id/buy/:price', function() {
-        it('User makes a purchase worth the price', async function() {
+        it('User makes a purchase worth the price 10', async function() {
             let id = 1;
             let price = 10;
             let sale = {id: id, price: price};
@@ -58,7 +57,7 @@ describe('demo', () => {
             expect(data.user).to.deep.equal({ id: idx, name: nameU, balance: bal });
         });   
 
-        it('User not found', async function() {
+        it('If user not found status: "error"', async function() {
             let id = 9;
             let price = 10;
             let sale = {id: id, price: price}
@@ -68,7 +67,7 @@ describe('demo', () => {
             expect(data).to.deep.equal({ status: 'error', text: 'user not found' });
         });   
         
-        it('User has not enough money', async function() {
+        it('If user has not enough money text: "not enough money"', async function() {
             let id = 2;
             let price = 10;
             let sale = {id: id, price: price};
@@ -81,7 +80,7 @@ describe('demo', () => {
 
 
     describe('/users/:id/faucet/:amount', function() {                
-        it('Give the user money for free', async function() {
+        it('Give the user 10 money for free', async function() {
             let id = 1;
             let amount = 10;
             let gift = {id: id, amount: amount}
@@ -95,7 +94,7 @@ describe('demo', () => {
             expect(data.user).to.deep.equal({ id: idx, name: nameU, balance: bal });
         }); 
 
-        it('User not found', async function() {
+        it('If user not found status: "error"', async function() {
             let id = 7
             let amount = 10;
             let gift = {id: id, amount: amount};
