@@ -25,10 +25,12 @@ describe('demo', () => {
 
     describe('users', function() {
         it('Registering a new user', async function() {
-            const res = await app.post('users', { name: 'Alice' });            
+            const res = await app.post('users', { name: 'Alice' }); 
+            let arr = users.users;
+            let len = arr.length;         
             const data = await res.json();
             expect(data.status).to.equal('ok');
-            expect(data.user).to.deep.equal({ id: 2, name: 'Alice', balance: 0.0 });
+            expect(data.user).to.deep.equal({ id: len, name: 'Alice', balance: 0.0 });
         });              
            
         it('Registering a new user2', async function() {
