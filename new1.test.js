@@ -44,20 +44,20 @@ describe('demo', () => {
 
     describe('/users/:id/buy/:price', function() {
         it('User makes a purchase worth the price', async function() {
-            let id = 1
+            let id = 1;
             let price = 10;
-            let sale = {id: id, price: price}
+            let sale = {id: id, price: price};
             const res = await app.post(`users/${id}/buy/${price}`, sale);
-            let idx = users.users[id-1].id
-            let nameU = users.users[id-1].name
-            let bal = users.users[id-1].balance
+            let idx = users.users[id-1].id;
+            let nameU = users.users[id-1].name;
+            let bal = users.users[id-1].balance;
             expect(res.status).to.equal(200);
             const data = await res.json();            
             expect(data.user).to.deep.equal({ id: idx, name: nameU, balance: bal });
         });   
 
         it('User not found', async function() {
-            let id = 9
+            let id = 9;
             let price = 10;
             let sale = {id: id, price: price}
             const res = await app.post(`users/${id}/buy/${price}`, sale);
@@ -67,9 +67,9 @@ describe('demo', () => {
         });   
         
         it('User has not enough money', async function() {
-            let id = 2
+            let id = 2;
             let price = 10;
-            let sale = {id: id, price: price}
+            let sale = {id: id, price: price};
             const res = await app.post(`users/${id}/buy/${price}`, sale);
             expect(res.status).to.equal(200);
             const data = await res.json();                
@@ -80,15 +80,13 @@ describe('demo', () => {
 
     describe('/users/:id/faucet/:amount', function() {                
         it('Give the user money for free', async function() {
-            let id = 1
+            let id = 1;
             let amount = 10;
             let gift = {id: id, amount: amount}
             const res = await app.post(`users/${id}/faucet/${amount}`, gift);
-
-            let idx = users.users[id-1].id
-            let nameU = users.users[id-1].name
-            let bal = users.users[id-1].balance
-            console.log('bal : ', bal)
+            let idx = users.users[id-1].id;
+            let nameU = users.users[id-1].name;
+            let bal = users.users[id-1].balance;
             expect(res.status).to.equal(200);
             const data = await res.json();
             expect(data.status).equal('ok');
