@@ -4,7 +4,7 @@ let users = require('../demo')
 
 
 describe('demo', () => {
-    describe('users/:id', () => {
+    describe('/users/:id', () => {
         it("Has a user info by id", async () => {      
             let r = await app.get("users/1");
             expect(r).to.have.property('status', 200);
@@ -22,7 +22,7 @@ describe('demo', () => {
         });
     });
 
-    describe('users', function() {
+    describe('/users', function() {
         it('Registering a new user Alice', async function() {
             const res = await app.post('users', { name: 'Alice' }); 
             let arr = users.users;
