@@ -45,16 +45,17 @@ describe('demo', () => {
 
     describe('/users/:id/buy/:price', function() {
         it('User makes a purchase worth the price 10', async function() {
-            let id = 1;
+            let id = 1
             let price = 10;
-            let sale = {id: id, price: price};
-            const res = await app.post(`users/${id}/buy/${price}`, sale);
-            let idx = users.users[id-1].id;
-            let nameU = users.users[id-1].name;
-            let bal = users.users[id-1].balance;
+            let idx = users.users[id-1].id
+            let nameU = users.users[id-1].name
+            let bal = users.users[id-1].balance
+            let newBal = bal-price;            
+            let sale = {id: id, price: price}
+            const res = await app.post(`users/${id}/buy/${price}`, sale);            
             expect(res.status).to.equal(200);
             const data = await res.json();            
-            expect(data.user).to.deep.equal({ id: idx, name: nameU, balance: bal });
+            expect(data.user).to.deep.equal({ id: idx, name: nameU, balance: newBal });
         });   
 
         it('If user not found status: "error"', async function() {
@@ -83,15 +84,16 @@ describe('demo', () => {
         it('Give the user 10 money for free', async function() {
             let id = 1;
             let amount = 10;
-            let gift = {id: id, amount: amount}
-            const res = await app.post(`users/${id}/faucet/${amount}`, gift);
+            let bal = users.users[id-1].balance
+            let newBal = bal+amount; 
             let idx = users.users[id-1].id;
             let nameU = users.users[id-1].name;
-            let bal = users.users[id-1].balance;
+            let gift = {id: id, amount: amount};
+            const res = await app.post(`users/${id}/faucet/${amount}`, gift);                        
             expect(res.status).to.equal(200);
             const data = await res.json();
             expect(data.status).equal('ok');
-            expect(data.user).to.deep.equal({ id: idx, name: nameU, balance: bal });
+            expect(data.user).to.deep.equal({ id: idx, name: nameU, balance: newBal });
         }); 
 
         it('If user not found status: "error"', async function() {
